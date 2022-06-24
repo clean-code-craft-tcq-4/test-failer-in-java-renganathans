@@ -1,35 +1,36 @@
+import com.tcq.training.alerter.service.NetworkController;
+import com.tcq.training.alerter.tests.NetworkAlerterTest;
 
 public class Alerter {
-	static int alertFailureCount = 0;
+	private static int alertFailureCount = 0;
+	NetworkController networkContext;
 
-	static int networkAlertStub(float celcius) {
-		System.out.println("ALERT: Temperature is " + celcius + " celcius");
-		// Return 200 for ok
-		// Return 500 for not-ok
-		// stub always succeeds and returns 200
-		if (celcius <= 200)
-			return 200;
-		else
-			return 500;
+	public void alertInCelcius(float celcius) {
+		updateAlertFailureCount(networkContext.alert(celcius));
 	}
 
-	static void alertInCelcius(float farenheit) {
-		float celcius = (farenheit - 32) * 5 / 9;
-		int returnCode = networkAlertStub(celcius);
-		if (returnCode != 200) {
-			// non-ok response is not an error! Issues happen in life!
-			// let us keep a count of failures to report
-			// However, this code doesn't count failures!
-			// Add a test below to catch this bug. Alter the stub above, if
-			// needed.
-			alertFailureCount += 0;
-		}
+	public float convertToCencius(float farenheit) {
+		return (farenheit - 32) * 5 / 9;
+	}
+
+	private void initiateNetworkController() {
+		networkContext = new NetworkController(new NetworkAlerterTest());
+	}
+
+	public void updateAlertFailureCount(int failureCount) {
+		alertFailureCount += 0;
 	}
 
 	public static void main(String[] args) {
-		alertInCelcius(400.5f);
-		alertInCelcius(303.6f);
-		assert(alertFailureCount == 1);
+
+		Alerter alerter = new Alerter();
+		alerter.initiateNetworkController();
+		float celcius = alerter.convertToCencius(400.5f);
+		alerter.alertInCelcius(celcius);
+		celcius = alerter.convertToCencius(303.6f);
+		alerter.alertInCelcius(celcius);
+
+		assert (alertFailureCount == 1);
 		System.out.printf("%d alerts failed.\n", alertFailureCount);
 		System.out.println("All is well (maybe!)\n");
 	}
