@@ -1,3 +1,4 @@
+package alerter;
 import com.tcq.training.alerter.service.NetworkController;
 import com.tcq.training.alerter.service.NetworkControllerUtil;
 
