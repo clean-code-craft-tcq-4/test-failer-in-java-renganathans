@@ -1,5 +1,5 @@
 import com.tcq.training.alerter.service.NetworkController;
-import com.tcq.training.alerter.tests.NetworkAlerterTest;
+import com.tcq.training.alerter.service.NetworkControllerUtil;
 
 public class Alerter {
 	private static int alertFailureCount = 0;
@@ -14,11 +14,12 @@ public class Alerter {
 	}
 
 	private void initiateNetworkController() {
-		networkContext = new NetworkController(new NetworkAlerterTest());
+		networkContext = NetworkControllerUtil.getNetworkController();
 	}
 
-	public void updateAlertFailureCount(int failureCount) {
-		alertFailureCount += 0;
+	public void updateAlertFailureCount(int returnCode) {
+		if (returnCode == 500)
+			alertFailureCount += 1;
 	}
 
 	public static void main(String[] args) {
@@ -32,6 +33,6 @@ public class Alerter {
 
 		assert (alertFailureCount == 1);
 		System.out.printf("%d alerts failed.\n", alertFailureCount);
-		System.out.println("All is well (maybe!)\n");
+		System.out.println("All is well \n");
 	}
 }

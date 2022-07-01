@@ -18,10 +18,10 @@ public class Misaligned {
 		String minorColors[] = { "Blue", "Orange", "Green", "Brown", "Slate" };
 		List<ColourCode> listOfColourCode = new LinkedList<ColourCode>();
 		int i = 0, j = 0;
-		for (i = 0; i < 5; i++) {
-			for (j = 0; j < 5; j++) {
-				listOfColourCode.add(new ColourCode.Builder().setPairNumber(i * 5 + j).setMajorColor(majorColors[i])
-						.setMinorColor(minorColors[i]).build());
+		for (i = 0; i < majorColors.length; i++) {
+			for (j = 0; j < minorColors.length; j++) {
+				listOfColourCode.add(new ColourCode.Builder().setPairNumber((i * 5 + j)+1).setMajorColor(majorColors[i])
+						.setMinorColor(minorColors[j]).build());
 			}
 		}
 		return listOfColourCode;
@@ -147,12 +147,12 @@ public class Misaligned {
 		case 22:
 			assert (colourCode.getPairNumber() == 22);
 			assert (colourCode.getMajorColor().equals("Violet"));
-			assert (colourCode.getMinorColor().equals("Blue"));
+			assert (colourCode.getMinorColor().equals("Orange"));
 			break;
 		case 23:
 			assert (colourCode.getPairNumber() == 23);
 			assert (colourCode.getMajorColor().equals("Violet"));
-			assert (colourCode.getMinorColor().equals("Orange"));
+			assert (colourCode.getMinorColor().equals("Green"));
 			break;
 		case 24:
 			assert (colourCode.getPairNumber() == 24);
@@ -175,6 +175,6 @@ public class Misaligned {
 		List<ColourCode> listOfColourCode = misaligned.generateColourCode();
 		misaligned.printColorMap(listOfColourCode);
 		misaligned.testColourCode(listOfColourCode);
-		System.out.println("All is well (maybe!)");
+		System.out.println("All is well");
 	}
 }
