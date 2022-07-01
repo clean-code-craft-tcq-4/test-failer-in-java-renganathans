@@ -4,7 +4,7 @@ public class ColourCode {
 	private int pairNumber;
 	private String majorColor;
 	private String minorColor;
-	
+
 	private ColourCode(int pairNumber, String minorColor, String majorColor) {
 		this.pairNumber = pairNumber;
 		this.minorColor = minorColor;
@@ -34,7 +34,7 @@ public class ColourCode {
 	public void setMinorColor(String minorColor) {
 		this.minorColor = minorColor;
 	}
-	
+
 	public static class Builder {
 		private int pairNumber;
 		private String majorColor;
@@ -54,11 +54,10 @@ public class ColourCode {
 			this.minorColor = minorColor;
 			return this;
 		}
-		
-		public ColourCode build(){
-			return new ColourCode(pairNumber,minorColor,majorColor);
+
+		public ColourCode build() {
+			return new ColourCode(pairNumber, minorColor, majorColor);
 		}
 	}
 
-	
 }
